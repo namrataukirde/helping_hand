@@ -41,7 +41,8 @@
               %ul.nav.navbar-nav.navbar-right
                 %li
                   / %a{:href => "javascript:void(0)"}
-                  %a{:href => "javascript:void(0)", class: "btn btn-raised btn-info", id: 'sign-in-btn'} Sign In
+                  %a{:href => "javascript:void(0)", class: "btn btn-raised btn-info", id: 'sign-in-btn',
+                    'data-toggle' => 'modal', 'data-target' => '#sign-in-modal'} Sign In
                 - if user_signed_in?
                   %li.dropdown
                     %a.dropdown-toggle{"data-target" => "#", "data-toggle" => "dropdown", :href => "http://fezvrasta.github.io/bootstrap-material-design/bootstrap-elements.html"}
@@ -49,6 +50,8 @@
                       %b.caret
                     %ul.dropdown-menu
                       = render "users/#{@current_user.detail_type.downcase}_account_links"
+      .row
+        = yield
       / Open source code
       :javascript
         window.page = window.location.hash || "#about";

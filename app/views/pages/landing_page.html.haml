@@ -1,1 +1,26 @@
-%h1 Hi
+#sign-in-modal.modal.fade{:role => "dialog"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", :type => "button"} ×
+        %h4.modal-title Sign In
+      .modal-body
+        = form_for User.new, url: session_path(User), html: { class: 'form-horizontal' } do |f|
+          %fieldset
+            .form-group
+              = f.label :email, class: 'col-md-2 control-label'
+              .col-md-10
+                = f.email_field :email, class: 'form-control'
+            .form-group
+              = f.label :password, class: 'col-md-2 control-label'
+              .col-md-10
+                = f.password_field :password, class: 'form-control'
+              .col-md-10.col-md-offset-2
+                .checkbox
+                  %label
+                    = f.check_box :remember_me
+                    = f.label :remember_me
+            .col-md-10.col-md-offset-2
+              = f.submit "Log in", class: 'btn btn-primary btn-raised'
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
