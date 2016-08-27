@@ -1,0 +1,13 @@
+%h1 Listing Items
+- @items.each do |item|
+  .row
+    .col-md-4 Volunteer Name:
+    .col-md-4= item.donor.name
+  .row
+    .col-md-4 Item Type:
+    .col-md-4= item.category
+  .row
+    .col-md-4 Description:
+    .col-md-4= truncate(item.description, :ommision => "... Read More", :length => 20)
+  .row
+    .col-md-4= link_to 'Accept', {:controller => "items", :action => "accept_item", :id => item.id}
