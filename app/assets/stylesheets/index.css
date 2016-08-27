@@ -60,6 +60,10 @@
     text-decoration: none;
 }
 
+.menu ul a {
+    text-decoration: none;
+}
+
 .pages {
     position: absolute;
     top: 0;
