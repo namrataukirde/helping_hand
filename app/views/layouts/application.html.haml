@@ -19,8 +19,7 @@
 
     / Dropdown.js
     %link{:href => "//cdn.rawgit.com/FezVrasta/dropdown.js/master/jquery.dropdown.css", :rel => "stylesheet"}/
-    / jQuery
-    %script{:src => "//code.jquery.com/jquery-1.10.2.min.js"}
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     .container-fluid.main
       .row
@@ -41,7 +40,8 @@
               %ul.nav.navbar-nav.navbar-right
                 %li
                   / %a{:href => "javascript:void(0)"}
-                  %a{:href => "javascript:void(0)", class: "btn btn-raised btn-info", id: 'sign-in-btn'} Sign In
+                  %a{:href => "javascript:void(0)", class: "btn btn-raised btn-info", id: 'sign-in-btn',
+                    'data-toggle' => 'modal', 'data-target' => '#sign-in-modal'} Sign In
                 - if user_signed_in?
                   %li.dropdown
                     %a.dropdown-toggle{"data-target" => "#", "data-toggle" => "dropdown", :href => "http://fezvrasta.github.io/bootstrap-material-design/bootstrap-elements.html"}
@@ -49,6 +49,8 @@
                       %b.caret
                     %ul.dropdown-menu
                       = render "users/#{@current_user.detail_type.downcase}_account_links"
+      .row
+        = yield
       / Open source code
       :javascript
         window.page = window.location.hash || "#about";
@@ -124,7 +126,6 @@
       / Twitter Bootstrap
       %script{:src => "//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"}
       / Material Design for Bootstrap
-      = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
       :javascript
         $.material.init();
       / Sliders

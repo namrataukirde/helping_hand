@@ -13,6 +13,7 @@
  *= require bootstrap-material-design.css
  *= require ripples.css
  *= require index.css
+ *= require landing_page
  *= require custom.scss
  *= require_self
  */

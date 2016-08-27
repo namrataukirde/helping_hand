@@ -1,6 +1,6 @@
 puts "********** Creating volunteer ***********"
 volunteer = Volunteer.new(name: "Tushar Titame", age: 23, gender: true,
-  qualification: 0 )
+  occupation: 0 )
 
 User.create(email: "tushar.titame@kiprosh.com", password: "password@1234",
   detail: volunteer)
