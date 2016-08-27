@@ -5,7 +5,7 @@
         .page-header
           %h1#tables
         .bs-component
-          %table.table.table-striped.table-hover
+          %table.table.table-white{cellpadding: '10'}
             %thead
               %tr
                 %th{width: '90%'} Description
@@ -27,9 +27,11 @@
                       %b User Details
                       %br
                       - donor = item.donor
-                      = "Address: #{donor.address.try(:display_address)}"
                       = "Name: #{donor.name}"
-                      = "Age: #{donor.age}"
+                      %br
+                      = "Address: #{donor.address.try(:display_address)}"
+                      %br
+                      = "Age: #{donor.age} |"
                       = "Gender: #{donor.display_gender}"
 
                   %td= link_to 'Edit', '#', class: 'btn btn-raised btn-primary'
