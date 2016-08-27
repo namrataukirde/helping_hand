@@ -3,3 +3,27 @@
     = f.label :name, class: 'col-md-2 control-label'
     .col-md-10
       = ff.text_field :name, class: 'form-control'
+  .form-group
+    = f.label :age, class: 'col-md-2 control-label'
+    .col-md-10
+      = ff.text_field :age, class: 'form-control'
+  .form-group
+    %label.col-md-2.control-label Radios
+    .col-md-10
+      .radio.radio-primary
+        %label
+          = ff.radio_button :gender, true
+          %span.circle
+          %span.check
+          Male
+      .radio.radio-primary
+        %label
+          = ff.radio_button :gender, true
+          %span.circle
+          %span.check
+          Female
+  .form-group
+    = ff.label :occupation, class: 'col-md-2 control-label'
+    .col-md-10
+      = ff.select :occupation, Volunteer.occupations_collection, {}, class: 'form-control'
+

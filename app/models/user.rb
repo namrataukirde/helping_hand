@@ -7,4 +7,8 @@ class User < ApplicationRecord
   belongs_to :detail, polymorphic: true
 
   accepts_nested_attributes_for :detail
+
+  def build_detail(params)
+    self.detail = detail_type.constantize.new(params)
+  end
 end
