@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  donor_id: 1
+  state: MyString
+  type: 1
+  quantity: 1
+  description: MyString
+  receiver_id: 1
+
+two:
+  donor_id: 1
+  state: MyString
+  type: 1
+  quantity: 1
+  description: MyString
+  receiver_id: 1
