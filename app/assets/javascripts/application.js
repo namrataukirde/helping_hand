@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require material.js
 //= require ripples.js
+//= require big_text.js
+//= require landing_page.js

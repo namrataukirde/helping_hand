@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :detail, polymorphic: true
+
+  accepts_nested_attributes_for :detail
 end

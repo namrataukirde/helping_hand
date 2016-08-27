@@ -15,12 +15,13 @@
     / Bootstrap Material Design
 
     = csrf_meta_tags
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'application', media: 'all'
 
     / Dropdown.js
     %link{:href => "//cdn.rawgit.com/FezVrasta/dropdown.js/master/jquery.dropdown.css", :rel => "stylesheet"}/
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  %body
+    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css", :rel => "stylesheet"}
+    = javascript_include_tag 'application'
+  %body{class: "#{params[:controller]}-#{params[:action]}"}
     .container-fluid.main
       .row
         .navbar.navbar-default
@@ -40,15 +41,19 @@
               %ul.nav.navbar-nav.navbar-right
                 %li
                   / %a{:href => "javascript:void(0)"}
-                  %a{:href => "javascript:void(0)", class: "btn btn-raised btn-info", id: 'sign-in-btn',
-                    'data-toggle' => 'modal', 'data-target' => '#sign-in-modal'} Sign In
-                - if user_signed_in?
-                  %li.dropdown
-                    %a.dropdown-toggle{"data-target" => "#", "data-toggle" => "dropdown", :href => "http://fezvrasta.github.io/bootstrap-material-design/bootstrap-elements.html"}
-                      = "Welcome #{@current_user.detail.name}"
-                      %b.caret
-                    %ul.dropdown-menu
-                      = render "users/#{@current_user.detail_type.downcase}_account_links"
+                  - if user_signed_in?
+                    %li.dropdown
+                      %a.dropdown-toggle{"data-target" => "#", "data-toggle" => "dropdown", :href => "javascript:void(0)"}
+                        = "Welcome #{current_user.detail.name}"
+                        %b.caret
+                      %ul.dropdown-menu
+                        = render "users/#{current_user.detail_type.downcase}_account_links"
+                        %li.divider
+                        %li
+                          = link_to 'Logout', destroy_user_session_path, method: :delete
+                  - else
+                    %a{:href => "javascript:void(0)", class: "btn btn-raised btn-info", id: 'sign-in-btn',
+                      'data-toggle' => 'modal', 'data-target' => '#sign-in-modal'} Sign In
       .row
         = yield
       / Open source code
@@ -132,5 +137,7 @@
       %script{:src => "//cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"}
       / Dropdown.js
       %script{:src => "https://cdn.rawgit.com/FezVrasta/dropdown.js/master/jquery.dropdown.js"}
+      %script{src: 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js'}
       :javascript
         $("#dropdown-menu select").dropdown();
+        toastr.options = {positionClass: 'toast-bottom-center'}

@@ -1,0 +1,19 @@
+= form_for user, url: registration_path(User), html: { class: 'form-horizontal registration-form' },
+  remote: true do |f|
+  %fieldset
+    .form-group
+      = f.label :email, class: 'col-md-2 control-label'
+      .col-md-10
+        = f.email_field :email, class: 'form-control', style: "cursor: auto;"
+    .form-group
+      = f.label :password, class: 'col-md-2 control-label'
+      .col-md-10
+        = f.password_field :password, class: 'form-control', style: "cursor: auto;"
+    .form-group
+      = f.label :password, class: 'col-md-2 control-label'
+      .col-md-10
+        = f.password_field :password_confirmation, class: 'form-control', style: "cursor: auto;"
+      = f.hidden_field :detail_type
+    = render "users/#{f.object.detail_type.downcase}_registration_form", f: f
+    .col-md-10.col-md-offset-2
+      %button.btn.btn-primary.btn-raised.registration-submit-btn Sign up
