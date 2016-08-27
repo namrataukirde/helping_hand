@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160827114838) do
+ActiveRecord::Schema.define(version: 20160827130901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,8 +23,9 @@ ActiveRecord::Schema.define(version: 20160827114838) do
     t.integer  "pincode"
     t.integer  "resource_id"
     t.string   "resource_type"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "contact_number"
     t.index ["resource_id", "resource_type"], name: "index_addresses_on_resource_id_and_resource_type", using: :btree
   end
 
@@ -43,7 +44,6 @@ ActiveRecord::Schema.define(version: 20160827114838) do
     t.string   "name"
     t.string   "description"
     t.string   "category"
-    t.integer  "address_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -72,9 +72,9 @@ ActiveRecord::Schema.define(version: 20160827114838) do
     t.string   "name"
     t.integer  "age"
     t.boolean  "gender"
-    t.integer  "qualification"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "occupation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
