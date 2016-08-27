@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
-  def profile
+  def add_donation
+    current_user.items.create(item_params)
+    redirect_to list_donations_users_path
   end
 
-  def add_donation
+  def profile
   end
 
   def list_donations
@@ -15,5 +17,11 @@ class UsersController < ApplicationController
 
   def ngo_donations
     @items = Item.all
+  end
+
+  private
+
+  def item_params
+    params[:item].permit(:description, :quantity, :category)
   end
 end

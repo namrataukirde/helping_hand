@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   end
 
   resources :donations
+
+  get 'items/accept_item'
+  resources :ngos
 end

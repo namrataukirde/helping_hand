@@ -17,4 +17,5 @@
  *= require custom.scss
  *= require users.scss
  *= require_self
+ *= require donations.scss
  */
