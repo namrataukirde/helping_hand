@@ -12,11 +12,11 @@ class UsersController < ApplicationController
   end
 
   def volunteer_donations
-    @items = current_user.items
+    @items = current_user.items.page(params[:page]).per(params[:per])
   end
 
   def ngo_donations
-    @items = Item.page(params[:page]).per(params[:per])
+    @items = Item.pending_donations.page(params[:page]).per(params[:per])
   end
 
   private

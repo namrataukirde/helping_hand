@@ -34,5 +34,6 @@
                       = "Age: #{donor.age} |"
                       = "Gender: #{donor.display_gender}"
 
-                  %td= link_to 'Edit', '#', class: 'btn btn-raised btn-primary'
+                  %td= link_to 'Accept', accept_donation_donation_path(item),
+                    method: :put, class: 'btn btn-raised btn-primary'
   = paginate @items

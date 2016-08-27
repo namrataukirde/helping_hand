@@ -11,8 +11,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :donations
-
-  get 'items/accept_item'
-  resources :ngos
+  resources :donations do
+    member do
+      put :accept_donation
+    end
+  end
 end

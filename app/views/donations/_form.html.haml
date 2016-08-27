@@ -1,0 +1,17 @@
+- button_title = item.new_record? ? "Add Donation" : "Update Donation"
+%fieldset
+  .form-group
+    = f.label :description, class: 'col-md-2 control-label'
+    .col-md-10
+      = f.text_area :description, class: 'form-control'
+  .form-group
+    = f.label :quantity, class: 'col-md-2 control-label'
+    .col-md-10
+      = f.text_field :quantity, class: 'form-control numeric',
+        style: "cursor: auto;"
+  .form-group
+    = f.label :category, class: 'col-md-2 control-label'
+    .col-md-10
+      = f.select :category, Item.categories_collection, {}, class: 'form-control'
+  .col-md-10.col-md-offset-2
+    = f.submit button_title, class: 'btn btn-primary btn-raised donation-submit-btn'
