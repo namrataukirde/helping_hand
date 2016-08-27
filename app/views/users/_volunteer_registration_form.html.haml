@@ -18,12 +18,12 @@
           Male
       .radio.radio-primary
         %label
-          = ff.radio_button :gender, true
+          = ff.radio_button :gender, false
           %span.circle
           %span.check
           Female
   .form-group
     = ff.label :occupation, class: 'col-md-2 control-label'
     .col-md-10
-      = ff.select :occupation, Volunteer.occupations_collection, {}, class: 'form-control'
+      = ff.select :occupation, Volunteer.occupation_collection, {}, class: 'form-control'
 
