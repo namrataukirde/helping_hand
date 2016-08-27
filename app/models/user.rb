@@ -7,4 +7,6 @@ class User < ApplicationRecord
   belongs_to :detail, polymorphic: true
 
   accepts_nested_attributes_for :detail
+
+  delegate :items, to: :detail
 end

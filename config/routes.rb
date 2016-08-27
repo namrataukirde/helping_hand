@@ -8,4 +8,13 @@ Rails.application.routes.draw do
   end
 
   root to: "pages#landing_page"
+
+  resources :users do
+    collection do
+      get :list_donations
+      post :add_donation
+    end
+  end
+
+  resources :donations
 end

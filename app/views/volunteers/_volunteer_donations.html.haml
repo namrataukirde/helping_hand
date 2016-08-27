@@ -1,0 +1,15 @@
+.list-items.col-xs-8
+  .row
+    %a{:href => add_donation_users_path, class: "btn btn-raised btn-primary",
+      id: 'new-donation-button'} Add New Donation
+  .row
+    - items.each do |item|
+      %li
+        %div
+          %span
+            = item.description
+          %span
+            = item.state
+          %span
+            = (item.try(:receiver).try(:name) || "Pending")
+

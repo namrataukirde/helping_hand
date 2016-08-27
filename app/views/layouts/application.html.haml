@@ -55,7 +55,14 @@
                     %a{:href => "javascript:void(0)", class: "btn btn-raised btn-info", id: 'sign-in-btn',
                       'data-toggle' => 'modal', 'data-target' => '#sign-in-modal'} Sign In
       .row
-        = yield
+        - if content_for? :sidebar
+          %nav.col-xs-2.menu
+            = yield :sidebar
+          .col-xs-10
+            .row
+              = yield
+        - else
+          = yield
       / Open source code
       :javascript
         window.page = window.location.hash || "#about";

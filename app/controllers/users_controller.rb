@@ -2,13 +2,18 @@ class UsersController < ApplicationController
   def profile
   end
 
-  # def goods
-  #   send("#{current_user.detail_type}_goods")
-  # end
+  def add_donation
+  end
 
-  # def ngo_goods
-  # end
+  def list_donations
+    send("#{current_user.detail_type.downcase}_donations")
+  end
 
-  # def voluteer_goods
-  # end
+  def volunteer_donations
+    @items = current_user.items
+  end
+
+  def ngo_donations
+    @items = Item.all
+  end
 end

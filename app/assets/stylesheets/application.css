@@ -15,5 +15,6 @@
  *= require index.css
  *= require landing_page
  *= require custom.scss
+ *= require users.scss
  *= require_self
  */
