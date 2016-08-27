@@ -34,58 +34,21 @@
               %a.navbar-brand{:href => "javascript:void(0)"} Helping Hand
             .navbar-collapse.collapse.navbar-responsive-collapse
               %ul.nav.navbar-nav
-                %li.active
-                  %a{:href => "javascript:void(0)"} Active
-                %li
-                  %a{:href => "javascript:void(0)"} Link
-                %li.dropdown
-                  %a.dropdown-toggle{"data-target" => "#", "data-toggle" => "dropdown", :href => "http://fezvrasta.github.io/bootstrap-material-design/bootstrap-elements.html"}
-                    Dropdown
-                    %b.caret
-                  %ul.dropdown-menu
-                    %li
-                      %a{:href => "javascript:void(0)"} Action
-                    %li
-                      %a{:href => "javascript:void(0)"} Another action
-                    %li
-                      %a{:href => "javascript:void(0)"} Something else here
-                    %li.divider
-                    %li.dropdown-header Dropdown header
-                    %li
-                      %a{:href => "javascript:void(0)"} Separated link
-                    %li
-                      %a{:href => "javascript:void(0)"} One more separated link
-              %form.navbar-form.navbar-left
-                .form-group
-                  %input.form-control.col-sm-8{:placeholder => "Search", :type => "text"}/
+                / %li.active
+                /   %a{:href => "javascript:void(0)"} Active
+                / %li
+                /   %a{:href => "javascript:void(0)"} Link
               %ul.nav.navbar-nav.navbar-right
                 %li
-                  %a{:href => "javascript:void(0)"} Link
-                %li.dropdown
-                  %a.dropdown-toggle{"data-target" => "#", "data-toggle" => "dropdown", :href => "http://fezvrasta.github.io/bootstrap-material-design/bootstrap-elements.html"}
-                    Dropdown
-                    %b.caret
-                  %ul.dropdown-menu
-                    %li
-                      %a{:href => "javascript:void(0)"} Action
-                    %li
-                      %a{:href => "javascript:void(0)"} Another action
-                    %li
-                      %a{:href => "javascript:void(0)"} Something else here
-                    %li.divider
-                    %li
-                      %a{:href => "javascript:void(0)"} Separated link
-            .bs-docs-section
-              .row
-                .col-md-12
-                  .page-header
-                    %h1#container Containers
-                  .bs-component
-                    .jumbotron
-                      %h1 Jumbotron
-                      %p This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.
-                      %p
-                        %a.btn.btn-primary.btn-lg Learn more
+                  / %a{:href => "javascript:void(0)"}
+                  %a{:href => "javascript:void(0)", class: "btn btn-raised btn-info", id: 'sign-in-btn'} Sign In
+                - if user_signed_in?
+                  %li.dropdown
+                    %a.dropdown-toggle{"data-target" => "#", "data-toggle" => "dropdown", :href => "http://fezvrasta.github.io/bootstrap-material-design/bootstrap-elements.html"}
+                      = "Welcome #{@current_user.detail.name}"
+                      %b.caret
+                    %ul.dropdown-menu
+                      = render "users/#{@current_user.detail_type.downcase}_account_links"
       / Open source code
       :javascript
         window.page = window.location.hash || "#about";
