@@ -1,0 +1,196 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Helping Hand
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    / Mobile support
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    / Material Design fonts
+    %link{:href => "http://fonts.googleapis.com/css?family=Roboto:300,400,500,700", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
+    / Bootstrap
+    %link{:href => "//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", :rel => "stylesheet"}/
+    / Bootstrap Material Design
+
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+
+    / Dropdown.js
+    %link{:href => "//cdn.rawgit.com/FezVrasta/dropdown.js/master/jquery.dropdown.css", :rel => "stylesheet"}/
+    / Page style
+    %link{:href => "index.css", :rel => "stylesheet"}/
+    / jQuery
+    %script{:src => "//code.jquery.com/jquery-1.10.2.min.js"}
+  %body
+    .container-fluid.main
+      .row
+        .navbar.navbar-default
+          .container-fluid
+            .navbar-header
+              %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", :type => "button"}
+                %span.icon-bar
+                %span.icon-bar
+                %span.icon-bar
+              %a.navbar-brand{:href => "javascript:void(0)"} Helping Hand
+            .navbar-collapse.collapse.navbar-responsive-collapse
+              %ul.nav.navbar-nav
+                %li.active
+                  %a{:href => "javascript:void(0)"} Active
+                %li
+                  %a{:href => "javascript:void(0)"} Link
+                %li.dropdown
+                  %a.dropdown-toggle{"data-target" => "#", "data-toggle" => "dropdown", :href => "http://fezvrasta.github.io/bootstrap-material-design/bootstrap-elements.html"}
+                    Dropdown
+                    %b.caret
+                  %ul.dropdown-menu
+                    %li
+                      %a{:href => "javascript:void(0)"} Action
+                    %li
+                      %a{:href => "javascript:void(0)"} Another action
+                    %li
+                      %a{:href => "javascript:void(0)"} Something else here
+                    %li.divider
+                    %li.dropdown-header Dropdown header
+                    %li
+                      %a{:href => "javascript:void(0)"} Separated link
+                    %li
+                      %a{:href => "javascript:void(0)"} One more separated link
+              %form.navbar-form.navbar-left
+                .form-group
+                  %input.form-control.col-sm-8{:placeholder => "Search", :type => "text"}/
+              %ul.nav.navbar-nav.navbar-right
+                %li
+                  %a{:href => "javascript:void(0)"} Link
+                %li.dropdown
+                  %a.dropdown-toggle{"data-target" => "#", "data-toggle" => "dropdown", :href => "http://fezvrasta.github.io/bootstrap-material-design/bootstrap-elements.html"}
+                    Dropdown
+                    %b.caret
+                  %ul.dropdown-menu
+                    %li
+                      %a{:href => "javascript:void(0)"} Action
+                    %li
+                      %a{:href => "javascript:void(0)"} Another action
+                    %li
+                      %a{:href => "javascript:void(0)"} Something else here
+                    %li.divider
+                    %li
+                      %a{:href => "javascript:void(0)"} Separated link
+            .bs-docs-section
+              .row
+                .col-md-12
+                  .page-header
+                    %h1#container Containers
+                  .bs-component
+                    .jumbotron
+                      %h1 Jumbotron
+                      %p This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.
+                      %p
+                        %a.btn.btn-primary.btn-lg Learn more
+      / Open source code
+      :javascript
+        window.page = window.location.hash || "#about";
+
+        $(document).ready(function () {
+          if (window.page != "#about") {
+            $(".menu").find("li[data-target=" + window.page + "]").trigger("click");
+          }
+        });
+
+        $(window).on("resize", function () {
+          $("html, body").height($(window).height());
+          $(".main, .menu").height($(window).height() - $(".header-panel").outerHeight());
+          $(".pages").height($(window).height());
+        }).trigger("resize");
+
+        $(".menu li").click(function () {
+          // Menu
+          if (!$(this).data("target")) return;
+          if ($(this).is(".active")) return;
+          $(".menu li").not($(this)).removeClass("active");
+          $(".page").not(page).removeClass("active").hide();
+          window.page = $(this).data("target");
+          var page = $(window.page);
+          window.location.hash = window.page;
+          $(this).addClass("active");
+
+
+          page.show();
+
+          var totop = setInterval(function () {
+            $(".pages").animate({scrollTop: 0}, 0);
+          }, 1);
+
+          setTimeout(function () {
+            page.addClass("active");
+            setTimeout(function () {
+              clearInterval(totop);
+            }, 1000);
+          }, 100);
+        });
+
+        function cleanSource(html) {
+          var lines = html.split(/\n/);
+
+          lines.shift();
+          lines.splice(-1, 1);
+
+          var indentSize = lines[0].length - lines[0].trim().length,
+              re = new RegExp(" {" + indentSize + "}");
+
+          lines = lines.map(function (line) {
+            if (line.match(re)) {
+              line = line.substring(indentSize);
+            }
+
+            return line;
+          });
+
+          lines = lines.join("\n");
+
+          return lines;
+        }
+
+        $("#opensource").click(function () {
+          $.get(window.location.href, function (data) {
+            var html = $(data).find(window.page).html();
+            html = cleanSource(html);
+            $("#source-modal pre").text(html);
+            $("#source-modal").modal();
+          });
+        });
+      / Twitter Bootstrap
+      %script{:src => "//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"}
+      / Material Design for Bootstrap
+      = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+      :javascript
+        $.material.init();
+      / Sliders
+      %script{:src => "//cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"}
+      :javascript
+        $(function () {
+          $.material.init();
+          $(".shor").noUiSlider({
+            start: 40,
+            connect: "lower",
+            range: {
+              min: 0,
+              max: 100
+            }
+          });
+
+          $(".svert").noUiSlider({
+            orientation: "vertical",
+            start: 40,
+            connect: "lower",
+            range: {
+              min: 0,
+              max: 100
+            }
+          });
+        });
+      / Dropdown.js
+      %script{:src => "https://cdn.rawgit.com/FezVrasta/dropdown.js/master/jquery.dropdown.js"}
+      :javascript
+        $("#dropdown-menu select").dropdown();
