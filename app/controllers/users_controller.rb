@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def ngo_donations
-    @items = Item.all
+    @items = Item.page(params[:page]).per(params[:per])
   end
 
   private

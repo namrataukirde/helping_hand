@@ -1,4 +1,8 @@
 $(document).ready(function() {
+  $('#sign-in-form').on('submit', function(e) {
+    e.preventDefault();
+  });
+
   $('#sign-in-submit-btn').on('click', function() {
     var form = $('#sign-in-form');
     $.ajax({

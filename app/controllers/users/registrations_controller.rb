@@ -1,5 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-# before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_sign_up_params, only: [:create, :update]
 # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
@@ -28,9 +28,29 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def update
+    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+    # byebug
+    resource_updated = update_resource(resource, sign_up_params)
+    if resource_updated
+      bypass_sign_in resource, scope: resource_name
+      render json: { after_sign_in_path: after_sign_in_path_for(User) }
+    else
+      clean_up_passwords resource
+      render json: { error: resource.errors.full_messages.join('<br>') }, status: 422
+    end
+  end
+
+  protected
+
+  def update_resource(resource, params)
+    resource.update_without_password(params)
+  end
+
   def configure_sign_up_params
+    # byebug
     devise_parameter_sanitizer.permit(:sign_up,
-      detail_attributes: [:id, :description, :category, :name, :age, :gender, :occupation])
+      keys: [:detail_type, detail_attributes: [:id, :description, :category, :name, :age, :gender, :occupation]])
   end
 
 
