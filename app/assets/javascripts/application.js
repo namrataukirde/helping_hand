@@ -14,4 +14,4 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require material.js
-//= require riple
+//= require ripples.js
