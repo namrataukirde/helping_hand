@@ -16,9 +16,12 @@
             %tbody
               - items.each do |item|
                 %tr
-                  %tr
-                    %td
+                  %td
+                    %div
                       %b= item.name
+                    - if item.confirmed?
+                      %div.label.label-primary
+                        Confirmed
                   %td
                     %div
                       %b Item Category:
@@ -29,6 +32,12 @@
                       %br
                       = item.description
                     %hr
+                    - if item.scheduled_time.present?
+                      %div
+                        %b Scheduled Meeting:
+                        %br
+                        = item.scheduled_time.in_time_zone
+                      %hr
                     %div
                       %b User Details
                       %br
@@ -40,6 +49,17 @@
                       = "Age: #{donor.age} |"
                       = "Gender: #{donor.display_gender}"
 
-                  %td= link_to 'Accept', accept_donation_donation_path(item),
-                    method: :put, class: 'btn btn-raised btn-primary'
+                  %td
+                    - if item.confirmed?
+                      = link_to 'Received', received_donation_path(item),
+                        method: :put, class: 'btn btn-raised btn-primary'
+                    - elsif item.pending?
+                      = link_to 'Accept', schedule_donation_path(item),
+                        class: 'btn btn-raised btn-primary'
+                    - elsif item.received?
+                      %div.label.label-primary
+                        Received
+                    - else
+                      %div.label.label-primary
+                        Request Sent
   = paginate @items

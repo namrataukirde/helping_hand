@@ -1,9 +1,31 @@
 class DonationsController < ApplicationController
-  before_action :authorize_user, only: [:edit, :update]
+  before_action :authorize_donor, only: [:edit, :update,
+    :confirm]
+  before_action :authorize_receiver, only: [:received]
+  before_action :find_donation, only: [:accept, :schedule]
 
-  def accept_donation
-    Item.where(id: params[:id]).first.accept!
+  def accept
+    scheduled_time = Time.parse(params[:item][:scheduled_time])
+    @item.update_attributes(scheduled_time: scheduled_time,
+      receiver_id: current_user.detail.id)
+    @item.accept!
     redirect_to list_donations_users_path
+  end
+
+  def confirm
+    @item.confirm!
+    redirect_to list_donations_users_path
+  end
+
+  def received
+    @item.received!
+    redirect_to list_donations_users_path
+  end
+
+  def reject
+  end
+
+  def schedule
   end
 
   def new
@@ -36,9 +58,18 @@ class DonationsController < ApplicationController
 
   private
 
-  def authorize_user
-    @item = Item.where(id: params[:id]).first
+  def authorize_donor
+    find_donation
     redirect_to(list_donations_users_path) unless(@item.donor == current_user.detail)
+  end
+
+  def authorize_receiver
+    find_donation
+    redirect_to(list_donations_users_path) unless(@item.receiver == current_user.detail)
+  end
+
+  def find_donation
+    @item = Item.where(id: params[:id]).first
   end
 
   def item_params

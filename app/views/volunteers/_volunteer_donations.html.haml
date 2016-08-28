@@ -18,20 +18,41 @@
                 - items.each do |item|
                   %tr
                     %td
-                      %b= item.name
+                      %div
+                        %b= item.name
+                      - if item.accepted?
+                        %div.label.label-primary
+                          Accepted
                     %td
                       %div
                         %b Item Category:
                         = item.category
                       %hr
+                      - if item.scheduled_time.present?
+                        %div
+                          %b Scheduled Meeting:
+                          %br
+                          = item.scheduled_time.in_time_zone
+                        %hr
                       %div
                         %b Description:
                         %br
                         = item.description
                       %hr
+                    %td
+                      - if item.pending?
+                        = link_to 'Edit', edit_donation_path(item),
+                          class: 'btn btn-raised btn-primary'
+                      - elsif item.accepted?
+                        = link_to 'Confirm', confirm_donation_path(item),
+                          method: :put, class: 'btn btn-raised btn-primary'
+                      - elsif item.confirmed?
+                        %div.label.label-primary
+                          Scheduled
+                      - else
+                        %div.label.label-primary
+                          Received
 
-                    %td= link_to 'Edit', edit_donation_path(item),
-                      class: 'btn btn-raised btn-primary'
     = paginate @items
 
 

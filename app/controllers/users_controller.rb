@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def ngo_donations
-    @q = Item.ransack(params[:q])
+    @q = Item.list_donations_for_ngo(current_user.detail).ransack(params[:q])
     @items = @q.result.page(params[:page]).per(params[:per])
   end
 
