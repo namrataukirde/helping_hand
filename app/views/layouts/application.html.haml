@@ -34,13 +34,8 @@
               %a.navbar-brand{:href => "javascript:void(0)"} Helping Hand
             .navbar-collapse.collapse.navbar-responsive-collapse
               %ul.nav.navbar-nav
-                / %li.active
-                /   %a{:href => "javascript:void(0)"} Active
-                / %li
-                /   %a{:href => "javascript:void(0)"} Link
               %ul.nav.navbar-nav.navbar-right
                 %li
-                  / %a{:href => "javascript:void(0)"}
                   - if user_signed_in?
                     %li.dropdown
                       %a.dropdown-toggle{"data-target" => "#", "data-toggle" => "dropdown", :href => "javascript:void(0)"}

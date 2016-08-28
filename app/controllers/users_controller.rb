@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
-  def profile
+  def add_donation
+    current_user.items.create(item_params)
+    redirect_to list_donations_users_path
   end
 
-  def add_donation
+  def profile
   end
 
   def list_donations
@@ -10,11 +12,18 @@ class UsersController < ApplicationController
   end
 
   def volunteer_donations
-    @items = current_user.items
+    @items = current_user.items.page(params[:page]).per(params[:per])
   end
 
   def ngo_donations
     @q = Item.ransack(params[:q])
     @items = @q.result.page(params[:page]).per(params[:per])
+    @items = Item.pending_donations.page(params[:page]).per(params[:per])
+  end
+
+  private
+
+  def item_params
+    params[:item].permit(:description, :quantity, :category)
   end
 end

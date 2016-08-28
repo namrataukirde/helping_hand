@@ -11,5 +11,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :donations
+  resources :donations do
+    member do
+      put :accept_donation
+    end
+  end
 end
