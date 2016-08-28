@@ -1,4 +1,5 @@
-#banner{style: 'height: 500px; width: 100%'}
+/ = image_tag 'banner.jpeg', width: '100%'
+#banner{style: "height: 500px; width: 100%; background-image: url(#{image_url('banner.jpeg')})"}
   .col-md-6
     .banner-text
       %h2

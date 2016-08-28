@@ -26,13 +26,14 @@
                         = item.category
                       %hr
                       %div
-                        .col-md-2
+                        .col-md-9.pad-left-0
                           %b Description:
                           %br
                           = item.description
-                        .col-md-9.col-md-offset-1
+                        .col-md-3
                           - if item.image.present?
                             = image_tag item.image.url(:thumb)
+                        .clearfix
                       %hr
 
                     %td= link_to 'Edit', edit_donation_path(item),
