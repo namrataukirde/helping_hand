@@ -9,6 +9,7 @@ class Item < ApplicationRecord
     :medicines, :other ]
   enumerize :category
 
+  validates :category, :quantity, presence: true
 
   before_create :set_initial_state
 
