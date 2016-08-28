@@ -19,3 +19,18 @@
 //= require big_text.js
 //= require landing_page.js
 //= require custom.js
+
+
+jQuery.fn.ForceNumericOnly = function() {
+  return this.each(function() {
+    $(this).keypress(function(e) {
+      if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+      }
+    });
+  });
+};
+
+$(document).ready(function() {
+  $('.numeric').ForceNumericOnly();
+});

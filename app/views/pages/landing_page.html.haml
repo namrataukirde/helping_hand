@@ -1,4 +1,5 @@
-#banner{style: 'height: 500px; width: 100%'}
+/ = image_tag 'banner.jpeg', width: '100%'
+#banner{style: "width: 100%; background-image: url(#{image_url('4.jpeg')})"}
   .col-md-6
     .banner-text
       %h2
@@ -10,13 +11,13 @@
         %span.glyphicon.glyphicon-gift
       / %br
       / .gift-icon
-  .col-md-6
-    .signup-btn-container
-      %a.btn.btn-raised.btn-primary.btn-lg.btn-block{href: '#',
-        'data-toggle' => 'modal', 'data-target' => '#sign-up-ngo'} Sign up as NGO
-      %br
-      %a.btn.btn-raised.btn-primary.btn-lg.btn-block{href: '#',
-        'data-toggle' => 'modal', 'data-target' => '#sign-up-volunteer'} Sign up as Volunteer
+    .col-md-11
+      .signup-btn-container
+        %a.btn.btn-raised.btn-primary.btn-lg.btn-block{href: '#',
+          'data-toggle' => 'modal', 'data-target' => '#sign-up-ngo'} Sign up as NGO
+        %br
+        %a.btn.btn-raised.btn-primary.btn-lg.btn-block{href: '#',
+          'data-toggle' => 'modal', 'data-target' => '#sign-up-volunteer'} Sign up as Volunteer
 
 #sign-in-modal.modal.fade{:role => "dialog"}
   .modal-dialog
@@ -29,11 +30,11 @@
           html: { class: 'form-horizontal', id: 'sign-in-form' } do |f|
           %fieldset
             .form-group
-              = f.label :email, class: 'col-md-2 control-label'
+              = f.label 'Email*', class: 'col-md-2 control-label'
               .col-md-10
                 = f.email_field :email, class: 'form-control', style: "cursor: auto;"
             .form-group
-              = f.label :password, class: 'col-md-2 control-label'
+              = f.label 'Password*', class: 'col-md-2 control-label'
               .col-md-10
                 = f.password_field :password, class: 'form-control', style: "cursor: auto;"
               .col-md-10.col-md-offset-2

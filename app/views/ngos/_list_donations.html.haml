@@ -7,7 +7,7 @@
         - if @items.empty?
           %h2 No items presennt
         - else
-          %table.table.table-white{cellpadding: '10'}
+          %table.table.table-white
             %thead
               %tr
                 %th{width: '20%'} Name
@@ -18,7 +18,8 @@
                 %tr
                   %td
                     %div
-                      %b= item.name
+                      %b
+                        = link_to item.name, donation_path(item)
                     - if item.confirmed?
                       %div.label.label-primary
                         Confirmed
@@ -28,9 +29,14 @@
                       = item.category
                     %hr
                     %div
-                      %b Description:
-                      %br
-                      = item.description
+                      .col-md-9.pad-left-0
+                        %b Description:
+                        %br
+                        = item.description
+                      .col-md-3
+                        - if item.image.present?
+                          = image_tag item.image.url(:thumb)
+                      .clearfix
                     %hr
                     - if item.scheduled_time.present?
                       %div

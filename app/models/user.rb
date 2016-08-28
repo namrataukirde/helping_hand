@@ -14,4 +14,8 @@ class User < ApplicationRecord
   def build_detail(params)
     self.detail = detail_type.constantize.new(params)
   end
+
+  def volunteer?
+    detail_type == 'Volunteer'
+  end
 end
