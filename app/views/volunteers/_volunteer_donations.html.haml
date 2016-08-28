@@ -52,9 +52,11 @@
                       - elsif item.accepted?
                         = link_to 'Confirm', confirm_donation_path(item),
                           method: :put, class: 'btn btn-raised btn-primary'
+                        = link_to 'Reject', reject_donation_path(item),
+                          method: :put, class: 'btn btn-raised btn-primary'
                       - elsif item.confirmed?
                         %div.label.label-primary
-                          Scheduled
+                          Confirmed by you
                       - else
                         %div.label.label-primary
                           Received

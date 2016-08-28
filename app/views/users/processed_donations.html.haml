@@ -1,0 +1,6 @@
+- content_for :sidebar do
+  = render partial: 'layouts/sidebar'
+- detail_type = current_user.detail_type.downcase
+
+= render partial: "#{detail_type.pluralize}/#{detail_type}_donations",
+  locals: { items: @items }

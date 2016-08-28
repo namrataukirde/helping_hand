@@ -1,6 +1,6 @@
 class DonationsController < ApplicationController
   before_action :authorize_donor, only: [:edit, :update,
-    :confirm]
+    :confirm, :reject]
   before_action :authorize_receiver, only: [:received]
   before_action :find_donation, only: [:accept, :schedule]
 
@@ -9,12 +9,12 @@ class DonationsController < ApplicationController
     @item.update_attributes(scheduled_time: scheduled_time,
       receiver_id: current_user.detail.id)
     @item.accept!
-    redirect_to list_donations_users_path
+    redirect_to processed_donations_users_path(state: "ngo_accepted")
   end
 
   def confirm
     @item.confirm!
-    redirect_to list_donations_users_path
+    redirect_to processed_donations_users_path(state: "volunteer_confirmed")
   end
 
   def received
@@ -23,6 +23,8 @@ class DonationsController < ApplicationController
   end
 
   def reject
+    @item.update_attributes(receiver_id: nil, scheduled_time: nil, state: "pending")
+    redirect_to list_donations_users_path
   end
 
   def schedule
@@ -43,7 +45,7 @@ class DonationsController < ApplicationController
     @item = Item.new(item_params.merge(donor_id: current_user.detail.id))
     if @item.save
       flash[:notice] = 'Added new item successfully'
-      redirect_to list_donations_users_path
+      redirect_to donation_path(@item)
     else
       flash[:error] = @item.errors.full_messages.join('<br>')
       render :new
@@ -56,7 +58,7 @@ class DonationsController < ApplicationController
   def update
     if @item.update(item_params)
       flash[:notice] = 'Item updated successfully'
-      redirect_to list_donations_users_path
+      redirect_to donation_path(@item)
     else
       flash[:error] = @items.errors.full_messages.join('<br>')
       render :edit

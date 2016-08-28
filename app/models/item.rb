@@ -22,7 +22,7 @@ class Item < ApplicationRecord
   end
 
   def accept!
-    self.update_column(:state, "ngo_accepted")
+    self.update_attribute(:state, "ngo_accepted")
   end
 
   def accepted?
@@ -42,15 +42,15 @@ class Item < ApplicationRecord
   end
 
   def reject!
-    self.update_column(:state, "pending")
+    self.update_attribute(:state, "pending")
   end
 
   def confirm!
-    self.update_column(:state, "volunteer_confirmed")
+    self.update_attribute(:state, "volunteer_confirmed")
   end
 
   def received!
-    self.update_column(:state, "ngo_received")
+    self.update_attribute(:state, "ngo_received")
   end
 
   class << self
@@ -58,8 +58,17 @@ class Item < ApplicationRecord
       where(state: "pending")
     end
 
+    def scheduled
+      where(state: "ngo_accepted")
+    end
+
+    def confirmed
+      where(state: "volunteer_confirmed")
+    end
+
     def list_donations_for_ngo(ngo_id)
       where("items.state = 'pending' OR items.receiver_id = (?)", ngo_id)
+        .order(updated_at: :desc)
     end
   end
 end

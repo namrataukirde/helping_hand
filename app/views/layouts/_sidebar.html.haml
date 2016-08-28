@@ -1,5 +1,18 @@
+- donations_count = current_user.donations_count
 %ul.sidebar
   %a{:href => profiles_users_path, id: 'profiles-link'}
     %li.withripple Profile
   %a{:href => list_donations_users_path, id: 'list-donations-link'}
-    %li.withripple  All Donations
+    %li.withripple
+      All Donations
+      %span.badge #{donations_count[:all]}
+  %a{:href => processed_donations_users_path(state: "ngo_accepted"),
+    id: 'list-donations-link'}
+    %li.withripple
+      Scheduled Donations
+      %span.badge #{donations_count[:scheduled]}
+  %a{:href => processed_donations_users_path(state: "volunteer_confirmed"),
+    id: 'list-donations-link'}
+    %li.withripple
+      Confirmed Donations
+      %span.badge #{donations_count[:confirmed]}
