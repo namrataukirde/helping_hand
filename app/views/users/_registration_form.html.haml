@@ -1,6 +1,9 @@
 = form_for user, url: registration_path(User), html: { class: 'form-horizontal registration-form' },
   remote: true do |f|
   %fieldset
+    %h1
+    - if user_signed_in?
+      = gravatar_for user
     .form-group
       = f.label 'Email*', class: 'col-md-2 control-label'
       .col-md-10
