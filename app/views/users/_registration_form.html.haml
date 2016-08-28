@@ -3,7 +3,7 @@
   %fieldset
     %h1
     - if user_signed_in?
-      = gravatar_for user
+      = gravatar_for user, 80
     .form-group
       = f.label 'Email*', class: 'col-md-2 control-label'
       .col-md-10

@@ -32,17 +32,18 @@
                 %span.icon-bar
                 %span.icon-bar
               %a.navbar-brand{:href => "javascript:void(0)"}
-                %span.glyphicon.glyphicon-hand-right{style: 'font-size: 20px'}
-                Helping Hand
-                %span.glyphicon.glyphicon-hand-left{style: 'font-size: 20px'}
+                %h2.logo
+                  Helping Hand
             .navbar-collapse.collapse.navbar-responsive-collapse
               %ul.nav.navbar-nav
               %ul.nav.navbar-nav.navbar-right
                 %li
                   - if user_signed_in?
+
                     %li.dropdown
                       %a.dropdown-toggle{"data-target" => "#", "data-toggle" => "dropdown", :href => "javascript:void(0)"}
-                        = "Welcome #{current_user.detail.name}"
+                        = "Welcome "
+                        = gravatar_for current_user, 35 
                         %b.caret
                       %ul.dropdown-menu
                         = render "users/#{current_user.detail_type.downcase}_account_links"

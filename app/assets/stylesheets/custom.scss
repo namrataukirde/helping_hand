@@ -3,9 +3,18 @@ body {
 }
 .nav.navbar-nav.navbar-right #sign-in-btn {
   padding: 8px;
+
 }
 .navbar {
   margin-bottom: 0px !important;
+
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#70d8bd+0,ffffff+100&1+0,0+100 */
+background: -moz-linear-gradient(top,  rgba(112,216,189,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  rgba(112,216,189,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  rgba(112,216,189,1) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#70d8bd', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+
+
 }
 #registration-edit-form {
   margin-top: 30px;
@@ -23,3 +32,19 @@ body {
 .pad-left-0 {
   padding-left: 0px !important;
 }
+.gravatar{
+	margin-left: 12.5px;
+}
+
+.logo{
+	
+    margin-top: 7px;
+    font-size: 1.3em;
+    color: #FFF;
+    font-weight: bold;
+}
+
+.logo:hover{
+	color: lightblue;
+}
+
