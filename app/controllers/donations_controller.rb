@@ -10,12 +10,28 @@ class DonationsController < ApplicationController
     @item = Item.new
   end
 
+  def create
+    @item = Item.new(item_params.merge(donor_id: current_user.detail.id))
+    if @item.save
+      flash[:notice] = 'Added new item successfully'
+      redirect_to list_donations_users_path
+    else
+      flash[:error] = @item.errors.full_messages.join('<br>')
+      render :new
+    end
+  end
+
   def edit
   end
 
   def update
-    @item.update_attributes(item_params)
-    redirect_to list_donations_users_path
+    if @item.update(item_params)
+      flash[:notice] = 'Item updated successfully'
+      redirect_to list_donations_users_path
+    else
+      flash[:error] = @items.errors.full_messages.join('<br>')
+      render :edit
+    end
   end
 
   private
@@ -26,6 +42,6 @@ class DonationsController < ApplicationController
   end
 
   def item_params
-    params[:item].permit(:description, :quantity, :category)
+    params[:item].permit(:name, :description, :quantity, :category, :image)
   end
 end

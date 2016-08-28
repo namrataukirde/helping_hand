@@ -10,11 +10,15 @@
           %table.table.table-white{cellpadding: '10'}
             %thead
               %tr
-                %th{width: '90%'} Description
+                %th{width: '20%'} Name
+                %th{width: '70%'} Description
                 %th{width: '10%'} Action
             %tbody
               - items.each do |item|
                 %tr
+                  %tr
+                    %td
+                      %b= item.name
                   %td
                     %div
                       %b Item Category:

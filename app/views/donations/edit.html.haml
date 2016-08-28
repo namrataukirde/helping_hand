@@ -1,6 +1,6 @@
 - content_for :sidebar do
   = render partial: 'layouts/sidebar'
-.col-md-8.col-md-offset-1.donations-form
+.col-md-8.col-md-offset-2.donations-form
   .well.bs-component
     = form_for @item, url: donation_path, html: { class: 'form-horizontal add-donation-form' } do |f|
       = render partial: "form", locals: {f: f, item: @item }

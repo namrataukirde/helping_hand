@@ -1,36 +1,37 @@
-.list-items.col-md-10
-  .row
+.row
+  .col-md-8.col-md-offset-2
     %a{:href => new_donation_path, class: "btn btn-raised btn-primary",
       id: 'new-donation-button'} Add New Donation
-  .row
-    .col-md-10.col-md-offset-1
-      .bs-docs-section
-        .row
-          .col-md-12
-            .page-header
-              %h1#tables
-            .bs-component
-              %table.table.table-white{cellpadding: '10'}
-                %thead
+    .bs-docs-section
+      .row
+        .col-md-12
+          .page-header
+            %h1#tables
+          .bs-component
+            %table.table.table-white{cellpadding: '10'}
+              %thead
+                %tr
+                  %th{width: '20%'} Name
+                  %th{width: '70%'} Description
+                  %th{width: '10%'} Action
+              %tbody
+                - items.each do |item|
                   %tr
-                    %th{width: '90%'} Description
-                    %th{width: '10%'} Action
-                %tbody
-                  - items.each do |item|
-                    %tr
-                      %td
-                        %div
-                          %b Item Category:
-                          = item.category
-                        %hr
-                        %div
-                          %b Description:
-                          %br
-                          = item.description
-                        %hr
+                    %td
+                      %b= item.name
+                    %td
+                      %div
+                        %b Item Category:
+                        = item.category
+                      %hr
+                      %div
+                        %b Description:
+                        %br
+                        = item.description
+                      %hr
 
-                      %td= link_to 'Edit', edit_donation_path(item),
-                        class: 'btn btn-raised btn-primary'
-      = paginate @items
+                    %td= link_to 'Edit', edit_donation_path(item),
+                      class: 'btn btn-raised btn-primary'
+    = paginate @items
 
 
