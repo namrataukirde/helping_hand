@@ -14,5 +14,7 @@
             %b Description:
             %br
             = @item.description
-  %div
-    = image_tag @item.image.url(:product)
+          %hr
+          %div
+            %b Image
+            = image_tag @item.image.url(:medium)

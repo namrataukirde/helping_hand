@@ -7,7 +7,6 @@ Rails.application.routes.draw do
     collection do
       get :profiles
       get :list_donations
-      post :add_donation
     end
   end
 

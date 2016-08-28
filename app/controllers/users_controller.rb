@@ -1,9 +1,4 @@
 class UsersController < ApplicationController
-  def add_donation
-    current_user.items.create(item_params)
-    redirect_to list_donations_users_path
-  end
-
   def profile
   end
 

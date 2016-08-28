@@ -7,7 +7,7 @@
         - if @items.empty?
           %h2 No items presennt
         - else
-          %table.table.table-white{cellpadding: '10'}
+          %table.table.table-white
             %thead
               %tr
                 %th{width: '20%'} Name
@@ -16,18 +16,22 @@
             %tbody
               - items.each do |item|
                 %tr
-                  %tr
-                    %td
-                      %b= item.name
+                  %td
+                    %b= item.name
                   %td
                     %div
                       %b Item Category:
                       = item.category
                     %hr
                     %div
-                      %b Description:
-                      %br
-                      = item.description
+                      .col-md-9.pad-left-0
+                        %b Description:
+                        %br
+                        = item.description
+                      .col-md-3
+                        - if item.image.present?
+                          = image_tag item.image.url(:thumb)
+                      .clearfix
                     %hr
                     %div
                       %b User Details
