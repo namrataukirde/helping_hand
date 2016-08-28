@@ -1,7 +1,7 @@
 - unless flash.empty?
-  - class_name = flash[:error].present? ? 'alert-danger' : 'alert-info'
+  - class_name = flash[:notice].present? ? 'alert-info' : 'alert-danger'
   .row
     .col-md-8.col-md-offset-2
       .alert.alert-dismissible.mar-top-72{class: class_name}
         %button.close{"data-dismiss" => "alert", :type => "button"} ×
-        = (flash[:error] || flash[:notice]).html_safe
+        = (flash[:error] || flash[:notice] || flash[:alert] || "Something went wrong").html_safe

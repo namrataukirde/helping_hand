@@ -9,7 +9,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 
   def create
-    # byebug
     build_resource(sign_up_params)
     resource.save
     if resource.persisted?
@@ -49,7 +48,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_sign_up_params
-    # byebug
     devise_parameter_sanitizer.permit(:sign_up,
       keys: [:detail_type, detail_attributes:
         [:id, :description, :category, :name, :age, :gender, :occupation,

@@ -1,0 +1,19 @@
+- content_for :sidebar do
+  = render partial: 'layouts/sidebar'
+.col-md-8.col-md-offset-2.donations-form
+  .well.bs-component
+    = form_for @item, url: accept_donation_path, method: :put,
+      html: { class: 'form-horizontal add-donation-form' } do |f|
+      %fieldset
+        .form-group
+          = f.label :scheduled_time, class: 'col-md-2 control-label'
+          .col-md-10
+            = f.text_field :scheduled_time, class: 'form-control',
+              id: 'scheduled-time-control'
+        .col-md-10.col-md-offset-2
+          = f.submit "Schedule Meeting", class: 'btn btn-primary btn-raised donation-submit-btn'
+:javascript
+  $(document).ready(function() {
+    $("#scheduled-time-control").bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
+  });
+

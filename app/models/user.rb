@@ -14,4 +14,17 @@ class User < ApplicationRecord
   def build_detail(params)
     self.detail = detail_type.constantize.new(params)
   end
+
+  def volunteer?
+    detail_type == 'Volunteer'
+  end
+
+  def donations
+    @donations ||= volunteer? ? items : Item.list_donations_for_ngo(self.detail.id)
+  end
+
+  def donations_count
+    { all: donations.count, scheduled: donations.scheduled.count,
+      confirmed: donations.confirmed.count }
+  end
 end

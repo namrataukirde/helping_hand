@@ -7,14 +7,17 @@ Rails.application.routes.draw do
     collection do
       get :profiles
       get :list_donations
+      get :processed_donations
     end
   end
 
-  resources :items
-
   resources :donations do
     member do
-      put :accept_donation
+      get :schedule
+      put :accept
+      put :confirm
+      put :received
+      put :reject
     end
   end
 end

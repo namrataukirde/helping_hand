@@ -27,7 +27,7 @@
     overflow: auto;
     padding: 0;
     border-right: 1px solid #009688;
-    height: 90vh;
+    border-bottom: 1px solid #009688;
 }
 
 .menu, .menu * {
@@ -43,7 +43,7 @@
 
 .menu ul li {
     list-style: none;
-    padding: 20px 0 20px 50px;
+    padding: 20px 0 20px 20px;
     font-size: 15px;
     font-weight: normal;
     cursor: pointer;

@@ -18,25 +18,49 @@
                 - items.each do |item|
                   %tr
                     %td
-                      %b
-                        = link_to item.name, item_path(item)
+                      %div
+                        %b
+                          = link_to item.name, donation_path(item)
+                      - if item.accepted?
+                        %div.label.label-primary
+                          Accepted
                     %td
                       %div
                         %b Item Category:
                         = item.category
                       %hr
+                      - if item.scheduled_time.present?
+                        %div
+                          %b Scheduled Meeting:
+                          %br
+                          = item.scheduled_time.in_time_zone
+                        %hr
                       %div
-                        .col-md-2
+                        .col-md-9.pad-left-0
                           %b Description:
                           %br
                           = item.description
-                        .col-md-9.col-md-offset-1
+                        .col-md-3
                           - if item.image.present?
                             = image_tag item.image.url(:thumb)
+                        .clearfix
                       %hr
+                    %td
+                      - if item.pending?
+                        = link_to 'Edit', edit_donation_path(item),
+                          class: 'btn btn-raised btn-primary'
+                      - elsif item.accepted?
+                        = link_to 'Confirm', confirm_donation_path(item),
+                          method: :put, class: 'btn btn-raised btn-primary'
+                        = link_to 'Reject', reject_donation_path(item),
+                          method: :put, class: 'btn btn-raised btn-primary'
+                      - elsif item.confirmed?
+                        %div.label.label-primary
+                          Confirmed by you
+                      - else
+                        %div.label.label-primary
+                          Received
 
-                    %td= link_to 'Edit', edit_donation_path(item),
-                      class: 'btn btn-raised btn-primary'
     = paginate @items
 
 

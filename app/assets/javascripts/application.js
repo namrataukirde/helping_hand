@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require material.js
+//= require moment-with-locales.js
+//= require bootstrap-material-datetimepicker.js
 //= require ripples.js
 //= require big_text.js
 //= require landing_page.js
