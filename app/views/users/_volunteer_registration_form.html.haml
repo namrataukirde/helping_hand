@@ -1,14 +1,14 @@
 = f.fields_for :detail do |ff|
   .form-group
-    = f.label :name, class: 'col-md-2 control-label'
+    = f.label 'Name*', class: 'col-md-2 control-label'
     .col-md-10
       = ff.text_field :name, class: 'form-control'
   .form-group
-    = f.label :age, class: 'col-md-2 control-label'
+    = f.label 'Age*', class: 'col-md-2 control-label'
     .col-md-10
-      = ff.text_field :age, class: 'form-control'
+      = ff.text_field :age, class: 'form-control numeric'
   .form-group
-    %label.col-md-2.control-label Radios
+    %label.col-md-2.control-label Gender*
     .col-md-10
       .radio.radio-primary
         %label
@@ -23,7 +23,7 @@
           %span.check
           Female
   .form-group
-    = ff.label :occupation, class: 'col-md-2 control-label'
+    = ff.label 'Occupation*', class: 'col-md-2 control-label'
     .col-md-10
       = ff.select :occupation, Volunteer.occupation_collection, {}, class: 'form-control'
   - if ff.object.user.try(:persisted?)

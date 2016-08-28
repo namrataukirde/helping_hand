@@ -2,16 +2,16 @@
   remote: true do |f|
   %fieldset
     .form-group
-      = f.label :email, class: 'col-md-2 control-label'
+      = f.label 'Email*', class: 'col-md-2 control-label'
       .col-md-10
         = f.email_field :email, class: 'form-control', style: "cursor: auto;"
     - if user.new_record?
       .form-group
-        = f.label :password, class: 'col-md-2 control-label'
+        = f.label 'Password*', class: 'col-md-2 control-label'
         .col-md-10
           = f.password_field :password, class: 'form-control', style: "cursor: auto;"
       .form-group
-        = f.label :password, class: 'col-md-2 control-label'
+        = f.label 'Password Confirmation*', class: 'col-md-2 control-label'
         .col-md-10
           = f.password_field :password_confirmation, class: 'form-control', style: "cursor: auto;"
         = f.hidden_field :detail_type
