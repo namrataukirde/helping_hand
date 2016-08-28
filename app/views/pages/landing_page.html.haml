@@ -11,12 +11,6 @@
         %span.glyphicon.glyphicon-gift
       / %br
       / .gift-icon
-  - if user_signed_in?
-    .col-md-6
-      .signup-btn-container
-      = link_to "Donate your Items", new_donation_path, class: "btn btn-raised btn-primary btn-lg btn-block"
-
-  - else
     .col-md-11
       .signup-btn-container
         %a.btn.btn-raised.btn-primary.btn-lg.btn-block{href: '#',
