@@ -17,7 +17,8 @@
               - items.each do |item|
                 %tr
                   %td
-                    %b= item.name
+                    %b
+                      = link_to item.name, item_path(item)
                   %td
                     %div
                       %b Item Category:
