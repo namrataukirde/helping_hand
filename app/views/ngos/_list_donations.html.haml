@@ -1,0 +1,41 @@
+.bs-docs-section
+  .row
+    .col-md-12
+      .page-header
+        %h1#tables
+      .bs-component
+        - if @items.empty?
+          %h2 No items presennt
+        - else
+          %table.table.table-white{cellpadding: '10'}
+            %thead
+              %tr
+                %th{width: '90%'} Description
+                %th{width: '10%'} Action
+            %tbody
+              - items.each do |item|
+                %tr
+                  %td
+                    %div
+                      %b Item Category:
+                      = item.category
+                    %hr
+                    %div
+                      %b Description:
+                      %br
+                      = item.description
+                    %hr
+                    %div
+                      %b User Details
+                      %br
+                      - donor = item.donor
+                      = "Name: #{donor.name}"
+                      %br
+                      = "Address: #{donor.address.try(:display_address)}"
+                      %br
+                      = "Age: #{donor.age} |"
+                      = "Gender: #{donor.display_gender}"
+
+                  %td= link_to 'Accept', accept_donation_donation_path(item),
+                    method: :put, class: 'btn btn-raised btn-primary'
+  = paginate @items

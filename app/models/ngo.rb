@@ -7,4 +7,6 @@ class Ngo < ApplicationRecord
 
   enum category: [:charitable, :service, :participatory, :empowering]
   enumerize :category
+
+  accepts_nested_attributes_for :address
 end

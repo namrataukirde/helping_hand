@@ -1,54 +1,18 @@
 .col-md-10.col-md-offset-1
   .search-bar
-    = search_form_for @q, url: list_donations_users_path do |f|
+    = search_form_for @q, url: list_donations_users_path, id: 'donation-search-form' do |f|
       .form-group
         = f.label :category_eq, class: 'col-md-2 control-label'
         .col-md-10
-          = f.select :category_eq, Item.category_collection, {}, class: 'form-control'
+          = f.select :category_eq, Item.category_collection_with_index, { include_blank: 'All Category' }, class: 'form-control'
         .clearfix
       .form-group
         = f.label 'State', class: 'col-md-2 control-label'
         .col-md-4
-          = f.text_field :address_state_eq, class: 'form-control'
+          = f.text_field :address_state_cont, class: 'form-control'
         = f.label 'City', class: 'col-md-2 control-label'
         .col-md-4
           = f.text_field :address_city_cont, class: 'form-control'
 
-  .bs-docs-section
-    .row
-      .col-md-12
-        .page-header
-          %h1#tables
-        .bs-component
-          %table.table.table-white{cellpadding: '10'}
-            %thead
-              %tr
-                %th{width: '90%'} Description
-                %th{width: '10%'} Action
-            %tbody
-              - @items.each do |item|
-                %tr
-                  %td
-                    %div
-                      %b Item Category:
-                      = item.category
-                    %hr
-                    %div
-                      %b Description:
-                      %br
-                      = item.description
-                    %hr
-                    %div
-                      %b User Details
-                      %br
-                      - donor = item.donor
-                      = "Name: #{donor.name}"
-                      %br
-                      = "Address: #{donor.address.try(:display_address)}"
-                      %br
-                      = "Age: #{donor.age} |"
-                      = "Gender: #{donor.display_gender}"
-
-                  %td= link_to 'Accept', accept_donation_donation_path(item),
-                    method: :put, class: 'btn btn-raised btn-primary'
-  = paginate @items
+  #donation-listing
+    = render 'ngos/list_donations', items: @items

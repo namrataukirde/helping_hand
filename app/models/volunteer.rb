@@ -8,6 +8,8 @@ class Volunteer < ApplicationRecord
   enum occupation: [:doctor, :engineer, :student]
   enumerize :occupation
 
+  accepts_nested_attributes_for :address
+
   def display_gender
     gender ? 'Male' : 'Female'
   end

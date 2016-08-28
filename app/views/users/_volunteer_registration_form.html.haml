@@ -26,4 +26,6 @@
     = ff.label :occupation, class: 'col-md-2 control-label'
     .col-md-10
       = ff.select :occupation, Volunteer.occupation_collection, {}, class: 'form-control'
-
+  - if ff.object.user.try(:persisted?)
+    = ff.fields_for :address do |addr|
+      = render 'addresses/form', f: addr

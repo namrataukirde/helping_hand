@@ -54,9 +54,19 @@
           %nav.col-md-2.menu
             = yield :sidebar
           .col-md-10
+            - if flash[:notice]
+              .row
+                .col-md-8.col-md-offset-2
+                  .alert.alert-dismissible.alert-success.mar-top-15
+                    %button.close{"data-dismiss" => "alert", :type => "button"} ×
+                    = flash[:notice]
             .row
               = yield
         - else
+          - if flash[:notice]
+            .alert.alert-dismissible.alert-success.mar-top-15
+              %button.close{"data-dismiss" => "alert", :type => "button"} ×
+              = flash[:notice]
           = yield
       / Open source code
       :javascript

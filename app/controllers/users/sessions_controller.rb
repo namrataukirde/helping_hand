@@ -12,6 +12,7 @@ class Users::SessionsController < Devise::SessionsController
     set_flash_message!(:notice, :signed_in)
     sign_in(resource_name, resource)
     if resource.valid?
+      flash[:notice] = 'Login Successful.'
       render json: { after_sign_in_path: "#{after_sign_in_path_for(resource)}" }
     else
       render json: { error: 'Invalid username and password' }, status: 422

@@ -16,4 +16,4 @@
 //= require ripples.js
 //= require big_text.js
 //= require landing_page.js
-//= require custom
+//= require custom.js

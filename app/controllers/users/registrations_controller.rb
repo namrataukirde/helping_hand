@@ -16,6 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if resource.active_for_authentication?
         sign_up(resource_name, resource)
         sign_in(resource_name, resource)
+        flash[:notice] = 'Registration Successful.'
         render json: { after_sign_in_path: after_sign_in_path_for(User) }
       else
         expire_data_after_sign_in!
@@ -30,10 +31,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
-    # byebug
     resource_updated = update_resource(resource, sign_up_params)
     if resource_updated
       bypass_sign_in resource, scope: resource_name
+      flash[:notice] = 'Profile successfully updated'
       render json: { after_sign_in_path: after_sign_in_path_for(User) }
     else
       clean_up_passwords resource
@@ -50,7 +51,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def configure_sign_up_params
     # byebug
     devise_parameter_sanitizer.permit(:sign_up,
-      keys: [:detail_type, detail_attributes: [:id, :description, :category, :name, :age, :gender, :occupation]])
+      keys: [:detail_type, detail_attributes:
+        [:id, :description, :category, :name, :age, :gender, :occupation,
+          address_attributes: [:id, :address_line, :city, :pincode, :state, :contact_number]
+        ]])
   end
 
 

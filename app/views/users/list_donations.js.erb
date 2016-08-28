@@ -1,0 +1,2 @@
+<% detail_type = current_user.detail_type.downcase %>
+$('#donation-listing').html('<%= j render("#{detail_type.pluralize}/list_donations", items: @items) %>');

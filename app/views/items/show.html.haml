@@ -1,0 +1,16 @@
+- content_for :sidebar do
+  = render partial: 'layouts/sidebar'
+
+.col-md-8.col-md-offset-2.mar-top-30
+  %table.table.table-white{cellpadding: '10'}
+    %tbody
+      %tr
+        %td
+          %div
+            %b Item Category:
+            = @item.category
+          %hr
+          %div
+            %b Description:
+            %br
+            = @item.description
