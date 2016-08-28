@@ -10,6 +10,13 @@ class DonationsController < ApplicationController
     @item = Item.new
   end
 
+  def show
+    @item = Item.find(params[:id])
+    if current_user.volunteer? && @item.donor != current_user.detail
+      raise ActionController::RoutingError.new('Not Found')
+    end
+  end
+
   def create
     @item = Item.new(item_params.merge(donor_id: current_user.detail.id))
     if @item.save
