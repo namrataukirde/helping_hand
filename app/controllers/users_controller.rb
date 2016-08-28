@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   end
 
   def ngo_donations
-    @items = Item.page(params[:page]).per(params[:per])
+    @q = Item.ransack(params[:q])
+    @items = @q.result.page(params[:page]).per(params[:per])
   end
 end
