@@ -57,12 +57,12 @@
           %nav.col-md-2.menu
             = yield :sidebar
           .col-md-10
-            = render 'shared/flash_message'
             .row
               = yield
+              = render 'shared/flash_message'
         - else
-          = render 'shared/flash_message'
           = yield
+          = render 'shared/flash_message'
       / Open source code
       :javascript
         window.page = window.location.hash || "#about";
