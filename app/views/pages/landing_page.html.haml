@@ -1,5 +1,5 @@
 / = image_tag 'banner.jpeg', width: '100%'
-#banner{style: "height: 500px; width: 100%; background-image: url(#{image_url('banner.jpeg')})"}
+#banner{style: "width: 100%; background-image: url(#{image_url('4.jpeg')})"}
   .col-md-6
     .banner-text
       %h2
@@ -11,13 +11,13 @@
         %span.glyphicon.glyphicon-gift
       / %br
       / .gift-icon
-  .col-md-6
-    .signup-btn-container
-      %a.btn.btn-raised.btn-primary.btn-lg.btn-block{href: '#',
-        'data-toggle' => 'modal', 'data-target' => '#sign-up-ngo'} Sign up as NGO
-      %br
-      %a.btn.btn-raised.btn-primary.btn-lg.btn-block{href: '#',
-        'data-toggle' => 'modal', 'data-target' => '#sign-up-volunteer'} Sign up as Volunteer
+    .col-md-11
+      .signup-btn-container
+        %a.btn.btn-raised.btn-primary.btn-lg.btn-block{href: '#',
+          'data-toggle' => 'modal', 'data-target' => '#sign-up-ngo'} Sign up as NGO
+        %br
+        %a.btn.btn-raised.btn-primary.btn-lg.btn-block{href: '#',
+          'data-toggle' => 'modal', 'data-target' => '#sign-up-volunteer'} Sign up as Volunteer
 
 #sign-in-modal.modal.fade{:role => "dialog"}
   .modal-dialog

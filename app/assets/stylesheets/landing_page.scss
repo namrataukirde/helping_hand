@@ -5,7 +5,9 @@
   }
   .banner-text {
     padding: 0px 10px;
-    font-size: 20px;
+    font-size: 25px;
+    margin-bottom: 25px;
+    margin-top: 25px;
   }
   .signup-btn-container {
     padding: 10px 40px;
@@ -17,6 +19,8 @@
 }
 
 #banner {
+  height: calc(100vh - 60px);
+  background-size: cover;
   padding: 20px 0px;
   background-color: #042B27;
   color: #fff;
