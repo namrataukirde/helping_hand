@@ -1,5 +1,4 @@
-= form_for user, url: registration_path(User), html: { class: 'form-horizontal registration-form' },
-  remote: true do |f|
+= form_for user, url: registration_path(User), html: { class: 'form-horizontal registration-form' } do |f|
   %fieldset
     - if user.email.present?
       = gravatar_for user
